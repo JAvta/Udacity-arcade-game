@@ -9,7 +9,7 @@ const Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.reset(); // Using a helper method to set new enemy's initial speed and location
-}
+};
 
 Enemy.prototype.reset = function() {
     const yRandom = function() { // IIFE returning a random Y location out of the three possible options
@@ -25,7 +25,7 @@ Enemy.prototype.reset = function() {
     this.x = -99;
     this.y = yRandom;
     this.speed = sRandom;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -48,12 +48,12 @@ Enemy.prototype.update = function(dt) {
         // Once a the player collides with an enemy,
         // the game is reset and the player moves back to the start square
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -63,12 +63,12 @@ const Player = function() {
 
     this.sprite = 'images/char-boy.png';
     this.reset();
-}
+};
 
 Player.prototype.reset = function() {
     this.x = 202;
     this.y = 380;
-}
+};
 
 Player.prototype.update = function(dt) {
     if (this.y < 0) { // Reset player's position once reached water (game won)
@@ -76,11 +76,11 @@ Player.prototype.update = function(dt) {
             player.reset();
         }, 300);
     }
-}
+};
 
 Player.prototype.render = function() {
     Enemy.prototype.render.call(this); // Calling enemy's render function on player binding 'this' to player
-}
+};
 
 Player.prototype.handleInput = function(key) {
     if (key == 'left' && this.x > 0) { // Additional criteria checks are there to prevent player going off canvas
@@ -95,7 +95,7 @@ Player.prototype.handleInput = function(key) {
     if (key == 'down' && this.y < 380) {
         this.y += 83;
     }
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
